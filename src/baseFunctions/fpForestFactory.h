@@ -4,6 +4,7 @@
 #include <string>
 #include "fpForestBase.h"
 #include "../forestTypes/basicForests/rerf/fpRerFBase.h"
+#include "../forestTypes/unsupervisedForests/urerf/fpURerFBase.h"
 #include "../forestTypes/basicForests/rfClassification/fpForestClassificationBase.h"
 #include "../forestTypes/newForest/inPlaceBase.h"
 #include "../forestTypes/binnedTree/binnedBase.h"
@@ -19,6 +20,8 @@ namespace fp{
 						return std::unique_ptr<fpForestBase<T> >{new fpForestClassificationBase<T>};
 					}else if(parameterName == "rerf"){
 						return std::unique_ptr<fpForestBase<T> >{new fpRerFBase<T>};
+					}else if(parameterName == "urerf"){
+						return std::unique_ptr<fpForestBase<T> >{new fpURerFBase<T>};
 					}else if(parameterName == "inPlace"){
 						return std::unique_ptr<fpForestBase<T> >{new inPlaceBase<T,int>};
 					}else if(parameterName == "inPlaceRerF"){

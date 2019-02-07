@@ -18,9 +18,9 @@ OBJEXT      := o
 
 #Flags, Libraries and Includes
 #CFLAGS      := -Wall -O3 -DNDEBUG -ffast-math 
-CFLAGS      := -fopenmp -Wall -O3 -DNDEBUG -ffast-math
+CFLAGS      := -g -fopenmp -Wall -O3 -DNDEBUG -ffast-math
 #LIB         := -fopenmp -lm -lnuma
-LIB         :=  -fopenmp -lm -O3 
+LIB         :=  -g -fopenmp -lm -O3 
 INC         := -I$(INCDIR) -I/usr/local/include 
 INCDEP      := -I$(INCDIR)
 

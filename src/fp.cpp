@@ -3,7 +3,10 @@
 #include <exception>
 
 int main(int argc, char* argv[]) {
-	if (argc != 4) return -1;
+	if (argc != 4){
+	 std::cout<<"need 4 pooints";
+	return -1;
+	}
 	int alg = atoi(argv[1]);
 	int dataSet = atoi(argv[2]);
 	int numCores = atoi(argv[3]);
@@ -52,7 +55,11 @@ int main(int argc, char* argv[]) {
 				forest.setParameter("forestType", "binnedBaseRerF");
 				forest.setParameter("numTreeBins", 5);
 				break;
+			case 9: 
+				forest.setParameter("forestType", "urerf");
+				break;
 			default:
+			std::cout<<"exit";
 				std::cout << "unknown alg selected" << std::endl;
 				return -1;
 				break;
@@ -90,13 +97,14 @@ int main(int argc, char* argv[]) {
 				break;
 		}
 
-
+		std::cout<<"exit";
 		forest.setParameter("numTreesInForest", 10);
 		forest.setParameter("minParent", 1);
 		forest.setParameter("numCores", numCores);
 
 		//logTime.startFindSplitTimer();
 		forest.growForest();
+		std::cout<<"after exit";
 		//logTime.stopFindSplitTimer();
 		//logTime.printGrowTime();
 
