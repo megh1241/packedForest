@@ -62,6 +62,7 @@ template<typename T>
 
 
 				fpSplitInfo<T> giniSplit(const std::vector<T>& featureVals, int featureNum){
+					std::cout<<"enter here here\n";
 					double tempImpurity;
 					int numLabels = labels.size();
 				//	timeLogger logTime;

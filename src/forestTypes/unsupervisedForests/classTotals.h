@@ -2,7 +2,6 @@
 #define classTotals_h
 
 #include <vector>
-
 namespace fp{
 
 	class classTotals{

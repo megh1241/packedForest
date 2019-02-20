@@ -3,6 +3,7 @@
 
 #include "splitURerFInfo.h"
 #include "labeledData.h"
+#include "unLabeledData.h"
 #include "classTotals.h"
 #include "../baseFunctions/pdqsort.h"
 #include <iostream>

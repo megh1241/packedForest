@@ -178,7 +178,7 @@ namespace fp{
 							loadFeatureHolder();
 							//logTime.stopGiniTimer();
 							//tempVec = featuresToTry.back();
-							setBestSplit(findSplit.giniSplit(baseUnprocessedNode<T>::featureHolder ,featuresToTry.back()));
+							setBestSplit(findSplit.giniSplit(baseUnprocessedNode<T>::featureHolder ,featuresToTry.front()));
 							//setBestSplit(findSplit.giniSplit(featureHolder ,tempVec));
 						}
 						removeTriedMtry();

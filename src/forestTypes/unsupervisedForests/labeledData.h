@@ -58,6 +58,7 @@ namespace fp{
 					dataLabel = dLab;
 				}
 		};
+	
 
 }//namespace fp
 #endif //labeledData_h
