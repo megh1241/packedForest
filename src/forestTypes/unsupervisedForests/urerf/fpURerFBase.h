@@ -3,6 +3,7 @@
 
 #include "../../../baseFunctions/fpForestBase.h"
 #include <vector>
+#include <map>
 #include <stdio.h>
 #include <ctime>
 #include <chrono>
@@ -16,7 +17,7 @@ namespace fp {
 	{
 		protected:
 			std::vector<urerfTree<T> > trees;
-
+			std::map<std::pair<int, int>, int > simMat;
 		public:
 
 			~fpURerFBase(){}
@@ -37,6 +38,7 @@ namespace fp {
 				for(int i = 0; i < (int)trees.size(); ++i){
 					printProgress.displayProgress(i);
 					trees[i].growTree();
+					trees[i].updateSimMat(simMat);
 				}
 				std::cout << " done growing forest.\n"<< std::flush;
 			}

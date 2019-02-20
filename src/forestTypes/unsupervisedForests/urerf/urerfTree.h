@@ -3,6 +3,7 @@
 #include "../../../baseFunctions/fpBaseNode.h"
 #include "unprocessedURerFNode.h"
 #include <vector>
+#include <map>
 #include <assert.h>
 
 namespace fp{
@@ -16,6 +17,7 @@ namespace fp{
 				float totalOOB;
 				std::vector< fpBaseNode<T, std::vector<int> > > tree;
 				std::vector< unprocessedURerFNode<T> > nodeQueue;
+				std::vector< unprocessedURerFNode<T> > leafNodes;
 
 			public:
 				urerfTree() : OOBAccuracy(-1.0),correctOOB(0),totalOOB(0){}
@@ -72,6 +74,12 @@ namespace fp{
 					return numLeafNodes;
 				}
 
+				inline void updateSimMat(std::map<std::pair<int, int>, int > simMat){
+					for(auto nodes : leafNodes){
+						stratifiedInNodeClassIndices* leftI = nodes.returnLeftIndices();
+						stratifiedInNodeClassIndices* rightI = nodes.returnRightIndices();
+					}
+				}
 
 				inline int returnLeafDepthSum(){
 					int leafDepthSums=0;
@@ -85,6 +93,7 @@ namespace fp{
 
 
 				inline void setAsLeaf(){
+					leafNodes.push_back(nodeQueue.back());
 					tree.back().setClass(nodeQueue.back().returnMaxClass());
 					tree.back().setDepth(nodeQueue.back().returnDepth());
 				}
