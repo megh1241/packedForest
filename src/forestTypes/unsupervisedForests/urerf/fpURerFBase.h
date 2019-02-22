@@ -32,8 +32,6 @@ namespace fp {
 			}
 
 			inline void growTrees(){
-
-				//fpSingleton::getSingleton().printXValues();
 #pragma omp parallel for num_threads(fpSingleton::getSingleton().returnNumThreads())
 				for(int i = 0; i < (int)trees.size(); ++i){
 					printProgress.displayProgress(i);

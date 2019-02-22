@@ -30,12 +30,6 @@ namespace fp{
 					std::for_each (std::begin(v), std::end(v), [&](const double d) {
     						accum += (d - mean) * (d - mean);
 					});
-    					/*auto const add_square = [mean](double sum, int i) {
-        					auto d = i - mean;
-        					return sum + d*d;
-    					};
-    					double total = std::accumulate(numbers.begin(), numbers.end(), 0.0, add_square);*/
-    					//return total / (numbers.size() - 1);
     					return accum;
 				}
 
@@ -44,21 +38,12 @@ namespace fp{
 				}
 
 				inline void createData(const std::vector<T> featureVals){
-					std::cout<<"Inside createData\n";
 					featureValsVec.clear();
 					auto siz_vec = featureVals.size();
-					std::cout<<"size: "<<siz_vec<<"\n";
-					std::cout<<"**********************************"<<"\n";
 					for(unsigned int i=0; i<siz_vec; ++i){
 						featureValsVec.push_back(featureVals.at(i));
 					}
 					std::sort(featureValsVec.begin(), featureValsVec.end());
-					for(unsigned int i=0; i<siz_vec; ++i){
-						std::cout<<featureValsVec.at(i)<<", ";
-					}
-					std::cout<<"size 1: "<<featureValsVec.size()<<"\n";
-					std::cout<<"**********************************"<<"\n";
-					std::cout<<"\n";
 				}
 
 
@@ -96,11 +81,9 @@ namespace fp{
 				inline splitURerFInfo<T> giniSplit(const std::vector<T>& featureVal, const std::vector<int>& featureNums){
                                         // initialize return value
                                         splitURerFInfo<T> currSplitInfo;
-					std::cout<<"size of featureVal vector before"<<featureVal.size()<<"\n";
                                         createData(featureVal);
 
                                         // sort feature Vals
-					std::cout<<"*********************************************************************\n";
                                         std::vector<T> errVec;
                                         std::vector<T> errVecLeft;
                                         std::vector<T> errVecRight;
@@ -109,10 +92,8 @@ namespace fp{
                         		std::sort(pbegin, pend);
                                         pbegin = featureValsVec.begin();
 					pend = featureValsVec.end();
-					std::cout<<"size 2: "<<featureValsVec.size()<<"\n";
                                         int sizeX = featureValsVec.size();
 					featureValsVec.erase(std::remove(pbegin, pend, 0), pend);
-					std::cout<<"size 3: "<<featureValsVec.size()<<"\n";
                                         int sizeNNZ = featureValsVec.size();
                                         int sizeZ = sizeX - sizeNNZ;
                                         T meanRight, sumLeft=0, meanLeft, cutPoint=0;
@@ -120,8 +101,6 @@ namespace fp{
                                         T minErrLeft = std::numeric_limits<T>::infinity();
                                         T minErrRight = std::numeric_limits<T>::infinity();
 					T sumRight = std::accumulate(featureValsVec.begin(), featureValsVec.end(), 0.0);
-					std::cout<<"size 4: "<<featureValsVec.size()<<"\n";
-					std::cout<<"initial sumRight: "<<sumRight<<"\n";
 					pbegin = featureValsVec.begin();
 					pend = featureValsVec.end();
 
@@ -136,7 +115,6 @@ namespace fp{
                                           if (sizeNNZ - 1) {
                                                         int index = 1;
 							int sizeIt = featureValsVec.size()-1;
-							std::cout<<"sizeIT: "<<sizeIt<<"\n";
                                                         for(int iter = 0; iter < sizeIt; ++iter) {
                                                                 int leftSize = sizeZ + index;
                                                                 int rightSize = sizeNNZ - index;
@@ -153,7 +131,7 @@ namespace fp{
 								auto errRight = computeSampleVariance(meanRight, newVec2);
                                                         	auto errCurr = errLeft + errRight;
 
-								if(index < 10){
+						/*		if(index < 10){
 									std::cout<<"**********************\n";
 									std::cout<<"**********************\n";
 									std::cout<<"leftArray: "<<"\n";
@@ -174,7 +152,7 @@ namespace fp{
 									std::cout<<"errRight: "<<errRight<<"\n";
 									std::cout<<"**********************\n";
 									std::cout<<"**********************\n";
-								}
+								}*/
 
                                                                 if (errCurr < minErr) {
 									
@@ -191,7 +169,6 @@ namespace fp{
                                           currSplitInfo.setLeftImpurity(minErrLeft);
                                           currSplitInfo.setRightImpurity(minErrRight);
                                           currSplitInfo.addFeatureNums(featureNums);	
-					std::cout<<"*********************************************************************\n";
 
 					 return currSplitInfo;
 				}

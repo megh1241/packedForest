@@ -76,8 +76,21 @@ namespace fp{
 
 				inline void updateSimMat(std::map<std::pair<int, int>, int > simMat){
 					for(auto nodes : leafNodes){
-						stratifiedInNodeClassIndices* leftI = nodes.returnLeftIndices();
-						stratifiedInNodeClassIndices* rightI = nodes.returnRightIndices();
+						stratifiedInNodeClassIndicesUnsupervised* obsI = nodes.returnObsIndices();
+						std::vector<int> leafObs;
+						leafObs = obsI->returnInSampsVec();
+						auto siz = leafObs.size();
+						for(int i = 0; i < siz-1; ++i) {
+							for (int j=i+1; j<siz; ++j) {
+								auto edge = std::make_pair(leafObs[i], leafObs[j]);
+								auto found = simMat.find(edge);
+
+							        if (found == simMat.end())
+									simMat.emplace(edge, 0);
+								else
+									simMat[edge]++;
+							}	
+						}
 					}
 				}
 
@@ -93,7 +106,6 @@ namespace fp{
 
 
 				inline void setAsLeaf(){
-					leafNodes.push_back(nodeQueue.back());
 					tree.back().setClass(nodeQueue.back().returnMaxClass());
 					tree.back().setDepth(nodeQueue.back().returnDepth());
 				}
@@ -110,7 +122,8 @@ namespace fp{
 					linkParentToChild();
 					setAsLeaf();
 					checkOOB();
-					nodeQueue.back().deleteObsIndices();
+					leafNodes.emplace_back(nodeQueue.back());
+				//	nodeQueue.back().deleteObsIndices();
 					nodeQueue.pop_back();
 				}
 
@@ -145,8 +158,8 @@ namespace fp{
 				inline void createChildren(){
 					nodeQueue.back().moveDataLeftOrRight();
 
-					stratifiedInNodeClassIndices* leftIndices = nodeQueue.back().returnLeftIndices();
-					stratifiedInNodeClassIndices* rightIndices = nodeQueue.back().returnRightIndices();
+					stratifiedInNodeClassIndicesUnsupervised* leftIndices = nodeQueue.back().returnLeftIndices();
+					stratifiedInNodeClassIndicesUnsupervised* rightIndices = nodeQueue.back().returnRightIndices();
 
 					assert(leftIndices->returnInSampleSize() > 0);
 					assert(rightIndices->returnInSampleSize() > 0);

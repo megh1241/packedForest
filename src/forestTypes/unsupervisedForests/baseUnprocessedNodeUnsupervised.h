@@ -1,14 +1,14 @@
-#ifndef baseUnprocessedNode_h
-#define baseUnprocessedNode_h
+#ifndef baseUnprocessedNodeUnsupervised_h
+#define baseUnprocessedNodeUnsupervised_h
 #include "classTotals.h"
-#include "stratifiedInNodeClassIndices.h"
+#include "stratifiedInNodeClassIndicesUnsupervised.h"
 #include <vector>
 
 namespace fp{
 
 
 	template <typename T> //
-		class baseUnprocessedNode{
+		class baseUnprocessedNodeUnsupervised{
 			protected:
 				int parentID;
 				int depth;
@@ -16,29 +16,33 @@ namespace fp{
 				bool isLeftNode; //in order to set parent node with location
 
 
-				stratifiedInNodeClassIndices* obsIndices;
-				stratifiedInNodeClassIndices* leftIndices;
-				stratifiedInNodeClassIndices* rightIndices;
+				stratifiedInNodeClassIndicesUnsupervised* obsIndices;
+				stratifiedInNodeClassIndicesUnsupervised* leftIndices;
+				stratifiedInNodeClassIndicesUnsupervised* rightIndices;
 
 				std::vector<T> featureHolder;
 				std::vector<int> labelHolder;
 				
 			public:
-				baseUnprocessedNode(int numObsForRoot):  parentID(0), depth(0), isLeftNode(true){
-					obsIndices = new stratifiedInNodeClassIndices(numObsForRoot);
+				baseUnprocessedNodeUnsupervised(int numObsForRoot):  parentID(0), depth(0), isLeftNode(true){
+					obsIndices = new stratifiedInNodeClassIndicesUnsupervised(numObsForRoot);
 				}
 
-				baseUnprocessedNode(int parentID, int dep, bool isLeft): parentID(parentID), depth(dep), isLeftNode(isLeft){}
+				baseUnprocessedNodeUnsupervised(int parentID, int dep, bool isLeft): parentID(parentID), depth(dep), isLeftNode(isLeft){}
 
-				virtual ~baseUnprocessedNode(){}
+				virtual ~baseUnprocessedNodeUnsupervised(){}
 				
 
-				inline stratifiedInNodeClassIndices* returnLeftIndices(){
+				inline stratifiedInNodeClassIndicesUnsupervised* returnLeftIndices(){
 					return leftIndices;
 				}
 
-				inline stratifiedInNodeClassIndices* returnRightIndices(){
+				inline stratifiedInNodeClassIndicesUnsupervised* returnRightIndices(){
 					return rightIndices;
+				}
+
+				inline stratifiedInNodeClassIndicesUnsupervised* returnObsIndices(){
+					return obsIndices;
 				}
 
 				inline int returnParentID(){
@@ -164,7 +168,7 @@ namespace fp{
 
 */
 
-				inline void loadIndices(stratifiedInNodeClassIndices* indices){
+				inline void loadIndices(stratifiedInNodeClassIndicesUnsupervised* indices){
 					obsIndices = indices;
 				}
 				/*
@@ -238,7 +242,7 @@ namespace fp{
 */
 
 				inline int returnMaxClass(){
-					if(labelHolder.empty()){
+					/*if(labelHolder.empty()){
 						std::cout << "no labels in holder\n";
 						exit(1);
 					}
@@ -248,11 +252,12 @@ namespace fp{
 						classTotals findMaxClass;
 						findMaxClass.findNumClasses(labelHolder);
 						return findMaxClass.returnLargestClass();
-					}
+					}*/
+					return 1;
 				}
 
 
 
 		}; //unprocessedNode.h
 }//namespace fp
-#endif //baseUnprocessedNode_h
+#endif //baseUnprocessedNodeUnsupervised_h

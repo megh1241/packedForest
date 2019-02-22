@@ -1,5 +1,5 @@
-#ifndef stratifiedInNodeClassIndices_h
-#define stratifiedInNodeClassIndices_h
+#ifndef stratifiedInNodeClassIndices2_h
+#define stratifiedInNodeClassIndices2_h
 
 #include <iostream>
 #include <random>
@@ -8,7 +8,8 @@
 
 namespace fp{
 
-	class stratifiedInNodeClassIndices
+	//class stratifiedInNodeClassIndicesUnsupervised : public stratifiedInNodeClassIndices
+	class stratifiedInNodeClassIndicesUnsupervised : public stratifiedInNodeClassIndices
 	{
 		private:
 			std::vector<std::vector<int> > inSamples;
@@ -20,10 +21,10 @@ namespace fp{
 
 			//TODO: the following functions would benefit from Vitter's Sequential Random Sampling
 		public:
-			stratifiedInNodeClassIndices(): inSamples(fpSingleton::getSingleton().returnNumClasses()), outSamples(fpSingleton::getSingleton().returnNumClasses()), inSampleSize(0), outSampleSize(0){}
+			stratifiedInNodeClassIndicesUnsupervised(): inSamples(fpSingleton::getSingleton().returnNumClasses()), outSamples(fpSingleton::getSingleton().returnNumClasses()), inSampleSize(0), outSampleSize(0){}
 
 
-			stratifiedInNodeClassIndices(const int &numObservationsInDataSet): inSamples(fpSingleton::getSingleton().returnNumClasses()), outSamples(fpSingleton::getSingleton().returnNumClasses()), inSampleSize(0), outSampleSize(0){
+			stratifiedInNodeClassIndicesUnsupervised(const int &numObservationsInDataSet): inSamples(fpSingleton::getSingleton().returnNumClasses()), outSamples(fpSingleton::getSingleton().returnNumClasses()), inSampleSize(0), outSampleSize(0){
 
 				createInAndOutSets(numObservationsInDataSet);
 
@@ -92,11 +93,14 @@ namespace fp{
 
 			inline void printIndices(){
 				std::cout << "samples in bag\n";
-				for(unsigned int n = 0; n < inSamples.size(); ++n){
+				std::cout<<inSamples.size()<<"\n";
+				for( int n = 0; n < inSamps.size(); ++n){
+					std::cout<<inSamps[n]<<" ";
 					for(auto & i : inSamples[n]){
 						std::cout << i << "\n";
 					}
 				}
+				std::cout<<"\n";
 
 				std::cout << "samples OOB\n";
 				for(unsigned int n = 0; n < outSamples.size(); ++n){
@@ -106,6 +110,9 @@ namespace fp{
 				}
 			}
 
+			inline std::vector<int> returnInSampsVec(){
+				return inSamps;
+			} 
 
 			inline int returnInSampleSize(){
 				return inSampleSize;

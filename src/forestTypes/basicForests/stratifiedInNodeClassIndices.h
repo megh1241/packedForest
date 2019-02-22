@@ -107,6 +107,21 @@ namespace fp{
 			}
 
 
+			inline void printIndicesPrint(){
+                                std::cout << "samples in bag\n";
+                                for(unsigned int n = 0; n < inSamples.size(); ++n){
+                                        for(auto & i : inSamples[n]){
+                                                std::cout << i << "\n";
+                                        }
+                                }
+
+                                std::cout << "samples OOB\n";
+                                for(unsigned int n = 0; n < outSamples.size(); ++n){
+                                        for(auto & i : outSamples[n]){
+                                                std::cout << i << "\n";
+                                        }
+                                }
+                        }
 			inline int returnInSampleSize(){
 				return inSampleSize;
 			}
