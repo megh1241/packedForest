@@ -74,12 +74,15 @@ namespace fp{
 					return numLeafNodes;
 				}
 
-				inline void updateSimMat(std::map<std::pair<int, int>, int > simMat){
+				inline void updateSimMat(std::map<std::pair<int, int>, int > &simMat){
 					for(auto nodes : leafNodes){
 						stratifiedInNodeClassIndicesUnsupervised* obsI = nodes.returnObsIndices();
 						std::vector<int> leafObs;
 						leafObs = obsI->returnInSampsVec();
 						auto siz = leafObs.size();
+						std::cout<<"SIZE of simMat: "<<simMat.size()<<"\n";
+						if (siz <= 0)
+							return;	
 						for(int i = 0; i < siz-1; ++i) {
 							for (int j=i+1; j<siz; ++j) {
 								auto edge = std::make_pair(leafObs[i], leafObs[j]);
@@ -123,7 +126,7 @@ namespace fp{
 					setAsLeaf();
 					checkOOB();
 					leafNodes.emplace_back(nodeQueue.back());
-				//	nodeQueue.back().deleteObsIndices();
+					//nodeQueue.back().deleteObsIndices();
 					nodeQueue.pop_back();
 				}
 

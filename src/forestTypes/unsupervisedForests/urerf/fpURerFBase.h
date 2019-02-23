@@ -32,11 +32,14 @@ namespace fp {
 			}
 
 			inline void growTrees(){
+				std::cout<<"etnerring entierring\n";
 #pragma omp parallel for num_threads(fpSingleton::getSingleton().returnNumThreads())
 				for(int i = 0; i < (int)trees.size(); ++i){
+				std::cout<<"enter loop\n";
 					printProgress.displayProgress(i);
 					trees[i].growTree();
 					trees[i].updateSimMat(simMat);
+				std::cout<<"exit\n";
 				}
 				std::cout << " done growing forest.\n"<< std::flush;
 			}

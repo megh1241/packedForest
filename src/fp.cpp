@@ -98,7 +98,7 @@ int main(int argc, char* argv[]) {
 		}
 
 		std::cout<<"exit";
-		forest.setParameter("numTreesInForest", 10);
+		forest.setParameter("numTreesInForest", 100);
 		forest.setParameter("minParent", 1);
 		forest.setParameter("numCores", numCores);
 
