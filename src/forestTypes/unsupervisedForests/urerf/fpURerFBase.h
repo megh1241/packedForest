@@ -41,8 +41,10 @@ namespace fp {
 				for(int i = 0; i < (int)trees.size(); ++i){
 					printProgress.displayProgress(i);
 					trees[i].growTree();
+					#pragma omp critical 
 					trees[i].updateSimMat(simMat);
 				}
+
 				std::cout << " done growing forest.\n"<< std::flush;
 			}
 
@@ -107,8 +109,8 @@ namespace fp {
 				std::cout << "avg leaf depth: " << float(totalLeafDepth)/float(totalLeafNodes) << "\n";
 				std::cout << "num leaf nodes: " << totalLeafNodes << "\n";
 
-				for(int i = 5; i<55; i+=5)
-						std::cout << "precision: " << computePrecision(i) << "\n";
+	//			for(int i = 5; i<55; i+=5)
+	//					std::cout << "precision: " << computePrecision(i) << "\n";
 			}
 
 			void printTree0(){
