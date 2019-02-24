@@ -10,7 +10,6 @@
 #include "rerfTree.h"
 
 namespace fp {
-
 	template <typename T>
 		class fpRerFBase : public fpForestBase<T>
 	{

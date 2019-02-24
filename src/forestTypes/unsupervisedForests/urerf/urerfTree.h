@@ -80,7 +80,6 @@ namespace fp{
 						std::vector<int> leafObs;
 						leafObs = obsI->returnInSampsVec();
 						auto siz = leafObs.size();
-						std::cout<<"SIZE of simMat: "<<simMat.size()<<"\n";
 						if (siz <= 0)
 							return;	
 						for(int i = 0; i < siz-1; ++i) {
